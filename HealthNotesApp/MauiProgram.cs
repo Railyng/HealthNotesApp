@@ -19,7 +19,10 @@ namespace HealthNotesApp
                 });
 
             // Servicios
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "habits.db3");//Base de datos
+            builder.Services.AddSingleton(new HabitDatabase(dbPath));
             builder.Services.AddSingleton<IHabitService, HabitService>();
+
 
             // ViewModels
             builder.Services.AddTransient<MainViewModel>();

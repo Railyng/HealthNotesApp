@@ -26,7 +26,7 @@ namespace HealthNotesApp.ViewModels
             if (string.IsNullOrWhiteSpace(Name))
                 return;
 
-            _habitService.AddHabit(new Habit
+            await _habitService.AddHabitAsync(new Habit
             {
                 Name = Name,
                 Goal = int.TryParse(Goal, out int g) ? g : 0,

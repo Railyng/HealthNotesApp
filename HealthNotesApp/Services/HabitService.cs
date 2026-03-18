@@ -1,20 +1,24 @@
 ﻿using HealthNotesApp.Models;
-using System.Collections.Generic;
 
 namespace HealthNotesApp.Services
 {
     public class HabitService : IHabitService
     {
-        private List<Habit> _habits = new();
+        private readonly HabitDatabase _db;
 
-        public List<Habit> GetHabits()
+        public HabitService(HabitDatabase db)
         {
-            return _habits;
+            _db = db;
         }
 
-        public void AddHabit(Habit habit)
+        public async Task<List<Habit>> GetHabitsAsync()
         {
-            _habits.Add(habit);
+            return await _db.GetHabitsAsync();
+        }
+
+        public async Task AddHabitAsync(Habit habit)
+        {
+            await _db.AddHabitAsync(habit);
         }
     }
 }

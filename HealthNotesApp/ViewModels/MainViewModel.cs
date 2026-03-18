@@ -19,27 +19,16 @@ namespace HealthNotesApp.ViewModels
             LoadHabits();
         }
 
-        private void LoadHabits()
+        private async void LoadHabits()
         {
-            var habits = _habitService.GetHabits();
             Habits.Clear();
+
+            var habits = await _habitService.GetHabitsAsync();
 
             foreach (var habit in habits)
                 Habits.Add(habit);
         }
 
-        [RelayCommand]
-        public void AddHabit()
-        {
-            _habitService.AddHabit(new Habit
-            {
-                Name = "Beber agua",
-                Goal = 8,
-                Progress = 0
-            });
-
-            LoadHabits();
-        }
         [RelayCommand]
         public async Task GoToAddHabit()
         {
