@@ -19,7 +19,7 @@ namespace HealthNotesApp.ViewModels
             LoadHabits();
         }
 
-        private async void LoadHabits()
+        public async void LoadHabits()
         {
             Habits.Clear();
 

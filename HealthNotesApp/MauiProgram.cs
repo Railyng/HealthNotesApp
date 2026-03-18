@@ -2,6 +2,7 @@
 using HealthNotesApp.Services;
 using HealthNotesApp.ViewModels;
 using HealthNotesApp.Views;
+using Microcharts.Maui;
 
 namespace HealthNotesApp
 {
@@ -27,11 +28,16 @@ namespace HealthNotesApp
             // ViewModels
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<AddHabitViewModel>();
+            builder.Services.AddTransient<StatsViewModel>();
 
 
             // Views
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<AddHabitPage>();
+            builder.Services.AddTransient<StatsPage>();
+
+            builder.UseMauiApp<App>()
+                   .UseMicrocharts();
 
             return builder.Build();
         }
