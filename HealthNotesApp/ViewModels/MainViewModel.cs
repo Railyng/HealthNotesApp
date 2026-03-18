@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using HealthNotesApp.Models;
 using HealthNotesApp.Services;
 using System.Collections.ObjectModel;
+using HealthNotesApp.Views;
 
 namespace HealthNotesApp.ViewModels
 {
@@ -38,6 +39,11 @@ namespace HealthNotesApp.ViewModels
             });
 
             LoadHabits();
+        }
+        [RelayCommand]
+        public async Task GoToAddHabit()
+        {
+            await Shell.Current.GoToAsync(nameof(AddHabitPage));
         }
     }
 }

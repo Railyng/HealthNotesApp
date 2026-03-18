@@ -1,6 +1,6 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HealthNotesApp.MainPage">
+             x:Class="HealthNotesApp.Views.MainPage">
 
     <VerticalStackLayout Padding="20">
 
@@ -23,7 +23,7 @@
         </CollectionView>
 
         <Button Text="Agregar hábito"
-                Command="{Binding AddHabitCommand}" />
+        Command="{Binding GoToAddHabitCommand}" />
 
     </VerticalStackLayout>
 </ContentPage>

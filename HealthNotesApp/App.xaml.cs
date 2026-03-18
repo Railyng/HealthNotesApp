@@ -1,30 +1,24 @@
-﻿namespace HealthNotesApp
+﻿namespace HealthNotesApp;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        MainPage = new AppShell();
+    }
+    protected override void OnStart()
+    {
+        Console.WriteLine("App inició");
+    }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+    protected override void OnSleep()
+    {
+        Console.WriteLine("App en segundo plano");
+    }
 
-        protected override void OnStart()
-        {
-            Console.WriteLine("App inició");
-        }
-
-        protected override void OnSleep()
-        {
-            Console.WriteLine("App en segundo plano");
-        }
-
-        protected override void OnResume()
-        {
-            Console.WriteLine("App reanudada");
-        }
+    protected override void OnResume()
+    {
+        Console.WriteLine("App reanudada");
     }
 }

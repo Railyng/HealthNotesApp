@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using HealthNotesApp.Services;
 using HealthNotesApp.ViewModels;
+using HealthNotesApp.Views;
 
 namespace HealthNotesApp
 {
@@ -21,10 +22,13 @@ namespace HealthNotesApp
             builder.Services.AddSingleton<IHabitService, HabitService>();
 
             // ViewModels
-            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<AddHabitViewModel>();
+
 
             // Views
-            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<AddHabitPage>();
 
             return builder.Build();
         }
