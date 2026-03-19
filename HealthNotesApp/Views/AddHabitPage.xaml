@@ -1,21 +1,54 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HealthNotesApp.Views.AddHabitPage"
-             Title="AddHabitPage">
-    <VerticalStackLayout Padding="20">
+             BackgroundColor="#1E1E2E">
 
-        <Label Text="Nuevo Hábito" FontSize="24" />
+    <VerticalStackLayout Padding="20" Spacing="20">
 
-        <Entry Placeholder="Nombre del hábito"
-               Text="{Binding Name}" />
+        <!-- TÍTULO -->
+        <Label Text="Nuevo Hábito"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="White"/>
 
-        <Entry Placeholder="Meta diaria"
-               Keyboard="Numeric"
-               Text="{Binding Goal}" />
+        <!-- CARD FORM -->
+        <Frame BackgroundColor="#2A2A3C"
+               CornerRadius="15"
+               Padding="20">
 
-        <Button Text="Guardar"
-                Command="{Binding SaveCommand}" />
+            <VerticalStackLayout Spacing="15">
+
+                <!-- NOMBRE -->
+                <Label Text="Nombre del hábito"
+                       TextColor="#B0B0B0"/>
+
+                <Entry Placeholder="Ej: Beber agua"
+                       Text="{Binding Name}"
+                       BackgroundColor="White"
+                       TextColor="Black"/>
+
+                <!-- META -->
+                <Label Text="Meta"
+                       TextColor="#B0B0B0"/>
+
+                <Entry Placeholder="Ej: 5"
+                       Keyboard="Numeric"
+                       Text="{Binding Goal}"
+                       BackgroundColor="White"
+                       TextColor="Black"/>
+
+                <!-- BOTÓN -->
+                <Button Text="Guardar hábito"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="50"/>
+
+            </VerticalStackLayout>
+
+        </Frame>
 
     </VerticalStackLayout>
+
 </ContentPage>

@@ -5,10 +5,20 @@
              x:Class="HealthNotesApp.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+
+            <!-- COLORES -->
+            <Color x:Key="Primary">#4CAF50</Color>
+            <Color x:Key="Secondary">#1E1E2E</Color>
+            <Color x:Key="CardColor">#2A2A3C</Color>
+            <Color x:Key="TextColor">#FFFFFF</Color>
+
+            <!-- ESTILO BOTÓN -->
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

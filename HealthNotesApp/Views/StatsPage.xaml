@@ -2,52 +2,68 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="HealthNotesApp.Views.StatsPage">
+    x:Class="HealthNotesApp.Views.StatsPage"
+    BackgroundColor="#1E1E2E">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
+            <!-- TÍTULO -->
             <Label Text="📊 Estadísticas"
                    FontSize="26"
+                   FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="White"/>
 
+            <!-- LISTA -->
             <CollectionView ItemsSource="{Binding ChartData}">
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <VerticalStackLayout Spacing="5">
+                        <!-- CARD -->
+                        <Frame BackgroundColor="#2A2A3C"
+                               CornerRadius="15"
+                               Padding="15"
+                               Margin="0,5">
 
-                            <!-- Nombre -->
-                            <Label Text="{Binding Name}"
-                                   FontSize="14"
-                                   TextColor="White"/>
+                            <VerticalStackLayout Spacing="10">
 
-                            <!-- Barra -->
-                            <Grid HeightRequest="20" BackgroundColor="#333">
+                                <!-- NOMBRE -->
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
 
-                                <!-- Fondo -->
-                                <BoxView BackgroundColor="#333"/>
+                                <!-- BARRA MODERNA -->
+                                <Grid HeightRequest="18"
+                                      BackgroundColor="#444">
 
-                                <!-- Progreso -->
-                                <BoxView 
-                                    BackgroundColor="#8E7CC3"
-                                    HorizontalOptions="Fill"
-                                    ScaleX="{Binding Scale}" />
+                                    <!-- Fondo -->
+                                    <BoxView BackgroundColor="#444"
+                                             CornerRadius="10"/>
 
-                            </Grid>
+                                    <!-- Progreso -->
+                                    <BoxView 
+                                        BackgroundColor="#4CAF50"
+                                        CornerRadius="10"
+                                        HorizontalOptions="FillAndExpand"
+                                        ScaleX="{Binding Scale}" 
+                                        AnchorX="0"/>
 
-                            <!-- Porcentaje -->
-                            <Label Text="{Binding PercentageText}"
-                                   FontSize="12"
-                                   TextColor="LightGray"/>
+                                </Grid>
 
-                        </VerticalStackLayout>
+                                <!-- PORCENTAJE -->
+                                <Label Text="{Binding PercentageText}"
+                                       FontSize="12"
+                                       TextColor="#B0B0B0"
+                                       HorizontalOptions="End"/>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
 
         </VerticalStackLayout>

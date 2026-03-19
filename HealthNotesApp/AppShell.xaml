@@ -5,11 +5,17 @@
     xmlns:views="clr-namespace:HealthNotesApp.Views">
 
     <TabBar>
-        <ShellContent Title="Inicio"
-                      ContentTemplate="{DataTemplate views:MainPage}" />
 
-        <ShellContent Title="Estadísticas"
-                      ContentTemplate="{DataTemplate views:StatsPage}" />
+        <ShellContent
+            Title="Hábitos"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate views:MainPage}" />
+
+        <ShellContent
+            Title="Estadísticas"
+            Icon="stats.png"
+            ContentTemplate="{DataTemplate views:StatsPage}" />
+
     </TabBar>
 
 </Shell>

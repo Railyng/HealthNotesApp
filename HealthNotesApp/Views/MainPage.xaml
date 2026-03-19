@@ -1,45 +1,83 @@
 ﻿<ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="HealthNotesApp.Views.MainPage">
+    x:Class="HealthNotesApp.Views.MainPage"
+    BackgroundColor="#1E1E2E">
+    
     <ScrollView>
+
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Button Text="➕ Nuevo hábito"
-                Command="{Binding AddHabitCommand}" />
+            <!-- TÍTULO -->
+            <Label Text="Mis Hábitos"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="White"/>
 
+            <!-- BOTÓN ORIGINAL (NO SE TOCA FUNCIONALIDAD) -->
+            <Button Text="➕ Nuevo hábito"
+                Command="{Binding AddHabitCommand}"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                CornerRadius="12"/>
+
+            <!-- LISTA -->
             <CollectionView ItemsSource="{Binding Habits}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <Frame BorderColor="Gray" Padding="10" Margin="5">
-                            <VerticalStackLayout>
+                        <!-- CARD -->
+                        <Frame BackgroundColor="#2A2A3C"
+                           CornerRadius="15"
+                           Padding="15"
+                           Margin="0,5">
 
-                                <Label Text="{Binding Name}" FontSize="18"/>
+                            <VerticalStackLayout Spacing="10">
 
-                                <Label Text="Progreso:"/>
-                                <Label Text="{Binding Progress}"/>
+                                <!-- NOMBRE -->
+                                <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   TextColor="White"
+                                   FontAttributes="Bold"/>
 
-                                <Label Text="Meta:"/>
-                                <Label Text="{Binding Goal}"/>
+                                <!-- PROGRESO TEXTO -->
+                                <Label Text="{Binding Progress}"
+                                   TextColor="#B0B0B0"/>
 
+                                <!-- BARRA (NO TOCAMOS LOGICA) -->
+                                <ProgressBar Progress="{Binding Progress}"
+                                         HeightRequest="8"
+                                         BackgroundColor="#444"
+                                         ProgressColor="#4CAF50"/>
+
+                                <!-- BOTONES (MISMO COMANDO) -->
                                 <HorizontalStackLayout Spacing="10">
 
                                     <Button Text="+"
+                                        BackgroundColor="#4CAF50"
+                                        TextColor="White"
+                                        CornerRadius="10"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncreaseProgressCommand}"
                                         CommandParameter="{Binding}" />
 
                                     <Button Text="Editar"
+                                        BackgroundColor="#FFC107"
+                                        TextColor="Black"
+                                        CornerRadius="10"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditHabitCommand}"
                                         CommandParameter="{Binding}" />
 
                                     <Button Text="Eliminar"
+                                        BackgroundColor="#F44336"
+                                        TextColor="White"
+                                        CornerRadius="10"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteHabitCommand}"
                                         CommandParameter="{Binding}" />
 
                                 </HorizontalStackLayout>
 
                             </VerticalStackLayout>
+
                         </Frame>
 
                     </DataTemplate>
