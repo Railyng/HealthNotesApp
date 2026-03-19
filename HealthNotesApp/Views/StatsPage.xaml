@@ -4,22 +4,53 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HealthNotesApp.Views.StatsPage">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-        <Label Text="📊 Estadísticas"
-               FontSize="26"
-               HorizontalOptions="Center"/>
+            <Label Text="📊 Estadísticas"
+                   FontSize="26"
+                   HorizontalOptions="Center"
+                   TextColor="White"/>
 
-        <Label Text="{Binding TotalHabits, StringFormat='Total de hábitos: {0}'}"
-               FontSize="18"/>
+            <CollectionView ItemsSource="{Binding ChartData}">
 
-        <Label Text="{Binding CompletionRate, StringFormat='Cumplimiento: {0}%'}"
-               FontSize="18"/>
-        
-        <Label Text="📈 Gráfico próximamente"
-               HorizontalOptions="Center"
-               FontSize="16"/>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
 
-    </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+
+                            <!-- Nombre -->
+                            <Label Text="{Binding Name}"
+                                   FontSize="14"
+                                   TextColor="White"/>
+
+                            <!-- Barra -->
+                            <Grid HeightRequest="20" BackgroundColor="#333">
+
+                                <!-- Fondo -->
+                                <BoxView BackgroundColor="#333"/>
+
+                                <!-- Progreso -->
+                                <BoxView 
+                                    BackgroundColor="#8E7CC3"
+                                    HorizontalOptions="Fill"
+                                    ScaleX="{Binding Scale}" />
+
+                            </Grid>
+
+                            <!-- Porcentaje -->
+                            <Label Text="{Binding PercentageText}"
+                                   FontSize="12"
+                                   TextColor="LightGray"/>
+
+                        </VerticalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

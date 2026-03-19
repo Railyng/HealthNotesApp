@@ -11,10 +11,10 @@ public partial class MainPage : ContentPage
         _vm = vm;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        _vm.LoadHabits();
+        await _vm.LoadHabits();
     }
 }

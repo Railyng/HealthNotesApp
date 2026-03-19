@@ -21,19 +21,37 @@ namespace HealthNotesApp.ViewModels
         }
 
         [RelayCommand]
-        public async Task Save()
+        private async Task SaveHabit()
         {
-            if (string.IsNullOrWhiteSpace(Name))
-                return;
-
-            await _habitService.AddHabitAsync(new Habit
+            try
             {
-                Name = Name,
-                Goal = int.TryParse(Goal, out int g) ? g : 0,
-                Progress = 0
-            });
+                if (string.IsNullOrWhiteSpace(Name))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "El nombre es obligatorio", "OK");
+                    return;
+                }
 
-            await Shell.Current.GoToAsync("..");
+                if (!int.TryParse(Goal, out int goalValue))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La meta debe ser un número", "OK");
+                    return;
+                }
+
+                var habit = new Habit
+                {
+                    Name = Name,
+                    Goal = goalValue,
+                    Progress = 0
+                };
+
+                await _habitService.AddHabitAsync(habit);
+
+                await Shell.Current.GoToAsync(".."); // volver
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error real", ex.Message, "OK");
+            }
         }
     }
 }

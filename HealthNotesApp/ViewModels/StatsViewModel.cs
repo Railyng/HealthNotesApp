@@ -1,58 +1,38 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using HealthNotesApp.Services;
-using Microcharts;
-using SkiaSharp;
+using System.Collections.ObjectModel;
 
-namespace HealthNotesApp.ViewModels
+namespace HealthNotesApp.ViewModels;
+
+public partial class StatsViewModel : ObservableObject
 {
-    public partial class StatsViewModel : ObservableObject
+    private readonly IHabitService _habitService;
+
+    public ObservableCollection<ChartItem> ChartData { get; set; } = new();
+
+    public StatsViewModel(IHabitService habitService)
     {
-        private readonly IHabitService _habitService;
+        _habitService = habitService;
+    }
 
-        [ObservableProperty]
-        private Chart habitChart;
+    public async Task LoadChart()
+    {
+        ChartData.Clear();
 
-        [ObservableProperty]
-        private int totalHabits;
+        var habits = await _habitService.GetHabitsAsync();
 
-        [ObservableProperty]
-        private double completionRate;
-
-        public StatsViewModel(IHabitService habitService)
+        foreach (var habit in habits)
         {
-            _habitService = habitService;
-            LoadStats();
-        }
+            double percentage = habit.Goal == 0
+                ? 0
+                : (habit.Progress * 1.0 / habit.Goal);
 
-        private async void LoadStats()
-        {
-            var habits = await _habitService.GetHabitsAsync();
-
-            TotalHabits = habits.Count;
-
-            int completed = habits.Count(h => h.Progress >= h.Goal);
-
-            CompletionRate = habits.Count == 0 ? 0 :
-                (double)completed / habits.Count * 100;
-
-            HabitChart = new DonutChart
+            ChartData.Add(new ChartItem
             {
-                Entries = new[]
-                {
-                    new ChartEntry(completed)
-                    {
-                        Label = "Completados",
-                        ValueLabel = completed.ToString(),
-                        Color = SKColor.Parse("#4CAF50")
-                    },
-                    new ChartEntry(habits.Count - completed)
-                    {
-                        Label = "Pendientes",
-                        ValueLabel = (habits.Count - completed).ToString(),
-                        Color = SKColor.Parse("#F44336")
-                    }
-                }
-            };
+                Name = habit.Name,
+                Scale = percentage, // 🔥 0 a 1 (clave)
+                PercentageText = $"{percentage * 100:F0}%"
+            });
         }
     }
 }

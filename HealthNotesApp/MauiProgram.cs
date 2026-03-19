@@ -2,7 +2,7 @@
 using HealthNotesApp.Services;
 using HealthNotesApp.ViewModels;
 using HealthNotesApp.Views;
-using Microcharts.Maui;
+using SQLite;
 
 namespace HealthNotesApp
 {
@@ -20,8 +20,12 @@ namespace HealthNotesApp
                 });
 
             // Servicios
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "habits.db3");//Base de datos
-            builder.Services.AddSingleton(new HabitDatabase(dbPath));
+        // 📦 SQLite
+        builder.Services.AddSingleton<SQLiteAsyncConnection>(s =>
+        {
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "habits.db3");
+            return new SQLiteAsyncConnection(dbPath);
+        });
             builder.Services.AddSingleton<IHabitService, HabitService>();
 
 
@@ -35,9 +39,6 @@ namespace HealthNotesApp
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<AddHabitPage>();
             builder.Services.AddTransient<StatsPage>();
-
-            builder.UseMauiApp<App>()
-                   .UseMicrocharts();
 
             return builder.Build();
         }

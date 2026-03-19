@@ -2,44 +2,50 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HealthNotesApp.Views.MainPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+            <Button Text="➕ Nuevo hábito"
+                Command="{Binding AddHabitCommand}" />
 
-        <Label Text="HealthNotes App"
-               FontSize="24"
-               HorizontalOptions="Center"/>
+            <CollectionView ItemsSource="{Binding Habits}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
 
-        <!-- LISTA DE HÁBITOS -->
-        <CollectionView ItemsSource="{Binding Habits}">
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <VerticalStackLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BackgroundColor="#1E1E1E"
-                           CornerRadius="10"
-                           Padding="10"
-                           Margin="0,5">
+                                <Label Text="{Binding Name}" FontSize="18"/>
 
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}"
-                                   FontSize="18"
-                                   TextColor="White"/>
+                                <Label Text="Progreso:"/>
+                                <Label Text="{Binding Progress}"/>
 
-                            <Label Text="{Binding Goal, StringFormat='Meta: {0}'}"
-                                   TextColor="LightGray"/>
+                                <Label Text="Meta:"/>
+                                <Label Text="{Binding Goal}"/>
 
-                            <Label Text="{Binding Progress, StringFormat='Progreso: {0}'}"
-                                   TextColor="LightGray"/>
-                        </VerticalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
 
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                                    <Button Text="+"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncreaseProgressCommand}"
+                                        CommandParameter="{Binding}" />
 
-        </CollectionView>
+                                    <Button Text="Editar"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditHabitCommand}"
+                                        CommandParameter="{Binding}" />
 
-        <Button Text="Agregar hábito"
-                Command="{Binding GoToAddHabitCommand}" />
+                                    <Button Text="Eliminar"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteHabitCommand}"
+                                        CommandParameter="{Binding}" />
 
-    </VerticalStackLayout>
+                                </HorizontalStackLayout>
 
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
